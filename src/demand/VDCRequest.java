@@ -83,7 +83,7 @@ public class VDCRequest extends Layer {
 
 
 	public void generateVM(Random vmNum,Random cpu,Random memory,Random disk){
-		this.setVMNum(Demand.VMNumDeman(vmNum));
+		this.setVMNum(Demand.UNINumDeamnd(vmNum));
 		for(int i=0;i<this.getVMNum();i++){
 			Node VM=new Node("N"+i, i, null, this, Constant.SERVER);
 			VM.setCpu(Demand.CPUDemand(cpu));

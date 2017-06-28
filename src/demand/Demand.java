@@ -24,6 +24,9 @@ public class Demand {
 	}
 
 	public static int VMNumDeman(Random vmNum) {
-		return vmNum.nextInt(15) + 7;// 4£¬16
+		return vmNum.nextInt(6) + 5;//5 ,10
+	}
+	public static int UNINumDeamnd(Random uniNum){
+		return uniNum.nextInt(21)+2;//2,22
 	}
 }

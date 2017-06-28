@@ -82,7 +82,7 @@ public class VDCTest_Dynamic {
 						}else{
 //							System.out.println(":fail");
 							currentRequest.releaseVMResource();
-//							currentRequest.releaseLinkSource();
+							currentRequest.releaseLinkSource();
 						}
 					}
 					

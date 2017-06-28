@@ -326,10 +326,10 @@ public class VDCEmbedding {
 		
 		
 		//如果Virtual Link映射失败，那么，将已经给分配给virtual link的链路资源释放掉		
-		if(!flag){
+		/*if(!flag){
 			request.releaseLinkSource();
 		}
-         
+         */
 		
 		return flag;
 	}

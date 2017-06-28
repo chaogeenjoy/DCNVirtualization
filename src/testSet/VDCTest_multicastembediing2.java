@@ -5,11 +5,12 @@ import java.util.Random;
 
 import demand.Demand;
 import demand.MulticastRequest;
+import embedding.MulticastEmbedding2;
 import embedding.MulticastVDCE;
 import general.Constant;
 import network.Layer;
 
-public class VDCETest_MC_Dynamic {
+public class VDCTest_multicastembediing2 {
 	public static void main(String[] args) {
 		double[] erlang={0.8,1.0};
 		
@@ -91,8 +92,8 @@ public class VDCETest_MC_Dynamic {
 							}
 						}*/
 					
-						
-						if(mcVDCE.vlEmbed(currentRequest, phyLayer)){
+						MulticastEmbedding2 mce=new MulticastEmbedding2();
+						if(mce.simpleMulticast(currentRequest, phyLayer)){
 							/*Iterator<String> ir2=phyLayer.getNodelist().keySet().iterator();
 							while(ir2.hasNext()){
 								Node pm=(Node)(phyLayer.getNodelist().get(ir2.next()));
@@ -177,5 +178,4 @@ public class VDCETest_MC_Dynamic {
 			}
 		}
 	}
-	
 }

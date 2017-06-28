@@ -24,7 +24,7 @@ public class Node extends CommonObject{
 	private int cpu;
 	private double disk;
 	private Node PM;//VM所映射的PM
-//	private Node VM;//
+	private boolean uniCast=false;//
 	private boolean successEmbed=false;//对于VM来说，这个标志用来表示当前的VM已经成功的映射
 //	                                                            对于PM来说，这个标志用来表示在这个VDC分配中，PM已经分配给其他的VM了，不可以再次使用了，
 //	                                                          用来放置不同的VM映射到同一个PM上
@@ -128,6 +128,16 @@ public class Node extends CommonObject{
 		this.PM = pM;
 	}
 	
+	
+	
+
+	public boolean isUniCast() {
+		return uniCast;
+	}
+
+	public void setUniCast(boolean uniCast) {
+		this.uniCast = uniCast;
+	}
 
 	public boolean isSuccessEmbed() {
 		return successEmbed;

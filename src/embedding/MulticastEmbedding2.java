@@ -83,7 +83,7 @@ public class MulticastEmbedding2 {
 					LinearRoute minRoute=null;
 					Node tempMCNode=null;
 					for(int j=0;j<MCNodeList.size();j++){
-						Node MCNode=MCNodeList.get(i);						
+						Node MCNode=MCNodeList.get(j);						
 						LinearRoute newRoute1=new LinearRoute("",(i+1), null);
 						RouteSearching rs1=new RouteSearching();
 						rs1.Dijkstras(MCNode, currentLeafPM, phyLayer, newRoute1, constraint);
@@ -116,9 +116,37 @@ public class MulticastEmbedding2 {
 						Link tempLink=new Link(name, request.getLinkNum(), null, request, currentLeafVM, vtempMVNode, minCost, minCost);
 						request.addLink(tempLink);
 						tempLink.setPhyLinkList(minRoute.getLinklist());
+					}else{
+						//失败，直接路由
+						LinearRoute newRoute2=new LinearRoute("",(i+1), null);
+						RouteSearching rs2=new RouteSearching();
+						rs2.Dijkstras(rootPM, currentLeafPM, phyLayer, newRoute2, constraint);
+						
+						if(newRoute2.getLinklist().size()==0){
+							flag=false;
+							break;
+						}else{
+							for(Link link:newRoute2.getLinklist()){
+								link.setRemainingBandwidth(link.getRemainingBandwidth()-request.getTrafficDemand());
+							}
+							
+							for(Node node:newRoute2.getNodelist()){
+								if((node.getAttribute()!=Constant.SERVER)&&(!MCNodeList.contains(node))){
+									MCNodeList.add(node);
+									Node newNode=new Node(node.getName(), node.getIndex(), null, request, Constant.SWITCH);
+									virtualMCNodeList.add(newNode);
+									virtualMCNodeMap.put(node.getName(), newNode);
+								}
+							}
+							
+							String name=rootVM.getName()+"-"+currentLeafVM.getName();
+							Link tempLink=new Link(name, request.getLinkNum(), null, request, rootVM, currentLeafVM, newRoute2.getlength(), newRoute2.getlength());
+							request.addLink(tempLink);
+							tempLink.setPhyLinkList(newRoute2.getLinklist());
+						}
 					}
 				}
-			}
+			} 
 		}
 		
 		return flag;
